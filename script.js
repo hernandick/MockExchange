@@ -224,7 +224,7 @@ function populatePortfolio(){
     
     for(let i = 0; i<=99 ; i++){
 
-        if(ledger[i].amount > 0.01){
+        if(ledger[i].amount * ledger[i].price > 0.1){
             const tr = document.createElement('tr')
             tr.innerHTML = `
                 <td>${ledger[i].symbol}</td>
