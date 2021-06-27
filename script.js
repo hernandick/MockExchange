@@ -344,9 +344,10 @@ function getPValue() {
     pValue = 0
     
     for(let i = 0; i<=99 ; i++){
-    pValue = pValue + ledger[i].amount * ledger[i].price
+        if(ledger[i].amount * ledger[i].price > 0){
+            pValue = pValue + ledger[i].amount * ledger[i].price
+        }
     }
-
     let tr = document.createElement('tr')
             
     tr.innerHTML = `
