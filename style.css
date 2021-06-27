@@ -26,6 +26,14 @@ h1{
     display: none;
   }
 }
+@media (max-width: 498px) {
+  .flex-grow-1{
+    position: relative;
+    top: 10px;
+    font-size: 11px;
+    font-family: 'Varela Round', sans-serif;
+  }
+}
 /* h1{
   padding-top: 100vh;
   font-family: 'Varela Round', sans-serif;
