@@ -19,7 +19,7 @@ const tBalance = document.getElementById('tBalance');
 const tPortfolio = document.getElementById('tPortfolio');
 const input = document.getElementById('input-buy-sell');
 let USD = 1000000;
-let pValue = 0;
+let pValue;
 let stocks;
 let ledger = [];
 const buyBtn = document.getElementById('buy-btn');
@@ -245,22 +245,6 @@ function resetPortfolio(){
     tPortfolio.innerHTML = ""
 }
 
-// STORE AND UPDATE LEDGER FUNCTIONS
-
-function storeLedger() {
-    localStorage.setItem('ledger',JSON.stringify(ledger))
-    localStorage.setItem('balance',USD)
-}
-
-function updateLedger(){
-    if(localStorage.getItem('ledger')){
-        ledger = JSON.parse(localStorage.getItem('ledger'))
-    }
-    if(localStorage.getItem('balance',USD)) {
-        USD = localStorage.getItem('balance')
-    }
-    updateLedgerPrice()
-}
 
 
 // Buy
@@ -348,6 +332,7 @@ function getPValue() {
             pValue = pValue + ledger[i].amount * ledger[i].price
         }
     }
+
     let tr = document.createElement('tr')
             
     tr.innerHTML = `
@@ -355,6 +340,23 @@ function getPValue() {
     `
     tPValue.appendChild(tr)
 
+}
+
+// STORE AND UPDATE LEDGER FUNCTIONS
+
+function storeLedger() {
+    localStorage.setItem('ledger',JSON.stringify(ledger))
+    localStorage.setItem('balance',USD)
+}
+
+function updateLedger(){
+    if(localStorage.getItem('ledger')){
+        ledger = JSON.parse(localStorage.getItem('ledger'))
+    }
+    if(localStorage.getItem('balance',USD)) {
+        USD = localStorage.getItem('balance')
+    }
+    updateLedgerPrice()
 }
 
 
