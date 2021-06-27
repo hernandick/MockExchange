@@ -257,7 +257,7 @@ function buy(){
     }else if(amount > USD){
         alert("not enough balance for transaction")
         input.value = ""
-    }else if(isNaN(amount) != false){
+    }else if(isNaN(amount) != false || amount == 0){
         console.log(typeof(isNaN(amount)))
         alert("please insert a valid amount") 
     }else{
@@ -287,7 +287,7 @@ function sell(){
     let amount = Number(input.value)
     if(symbol == ""){
         alert("chose symbol to buy")
-    }else if(isNaN(amount) != false){
+    }else if(isNaN(amount) != false || amount == 0){
         console.log(typeof(isNaN(amount)))
         alert("please insert a valid amount") 
     }else{
