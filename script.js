@@ -115,7 +115,7 @@ filter.addEventListener('input', (e)=> filterData(e.currentTarget.value))
 
 async function getData() {
 
-const response = await fetch("https://spreadsheets.google.com/feeds/list/12zeYYIs_1lcsDA8M4TAcgtyTZviII2s3q3jXO8efl6M/od6/public/basic?alt=json")
+const response = await fetch("https://sheet.best/api/sheets/18fd4d4f-9f4f-4d14-be7b-7e95d88140e2")
 
 .then(response => response.json())
 
@@ -125,14 +125,14 @@ const response = await fetch("https://spreadsheets.google.com/feeds/list/12zeYYI
         
         listItems.push(tr)
 
-        let str1 =  response.feed.entry[i].content.$t
+        let str1 =  response[i]
 
         tr.innerHTML = `
             <th scope="row">${i+1}</th>
-            <td>${response.feed.entry[i].title.$t}</td>
-            <td>${str1.substring(str1.indexOf(": ")+2,str1.indexOf(", "))}</td>
-            <td>${str1.substring(str1.indexOf("price: ")+7,str1.indexOf(", c"))}</td>
-            <td>${str1.substring(str1.indexOf("change24hs: ")+12,100)}</td>
+            <td>${response[i].Symbol}</td>
+            <td>${str1.Name}</td>
+            <td>${str1.Price}</td>
+            <td>${str1.Change24hs}</td>
         `
         tbody.appendChild(tr)
 
@@ -154,11 +154,11 @@ getData()
 
 function populateDropdown(){
     for(let i = 0; i<=99 ;i++){
-    let str2 =  info.feed.entry[i].content.$t
+    let str2 =  info[i]
     const li = document.createElement('li')
     dropdownList.push(li)
     li.innerHTML =`
-    <li><a id="dropdown-item" class="dropdown-item" href="#">${str2.substring(str2.indexOf(": ")+2,str2.indexOf(", "))}</a></li>
+    <li><a id="dropdown-item" class="dropdown-item" href="#">${str2.Symbol}</a></li>
     `
     dropdown.appendChild(li)
 
@@ -199,11 +199,11 @@ function getBalance() {
 function createLedger() {
 
     for(let i = 0; i<=99 ;i++){
-        let str2 =  info.feed.entry[i].content.$t
+        let str2 =  info[i]
         
         stocks = { 
-            "symbol": str2.substring(str2.indexOf(": ")+2,str2.indexOf(", ")),
-            "price": str2.substring(str2.indexOf("price: ")+7,str2.indexOf(", c")),
+            "symbol": str2.Symbol,
+            "price": str2.Price,
             "amount": 0}
         
             ledger.push(stocks)
@@ -213,9 +213,9 @@ function createLedger() {
 
 function updateLedgerPrice(){
     for(let i = 0; i<=99 ;i++){
-    let str2 =  info.feed.entry[i].content.$t
+    let str2 =  info[i]
         
-    ledger[i].price = str2.substring(str2.indexOf("price: ")+7,str2.indexOf(", c"))
+    ledger[i].price = str2.Price
                 
 }
 }
